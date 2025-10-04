@@ -19,14 +19,15 @@ export const signUp = async (req, res) => {
     
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    user = await User.create({      fullName,
+    const newUser = await User.create({
+      fullName,
       email,
       password: hashedPassword,
       mobile,
       role
     });
 
-    const token = await genToken(user._id);
+    const token = await genToken(newUser._id);
 
     res.cookie("token", token, {
       httpOnly: true,
@@ -36,7 +37,7 @@ export const signUp = async (req, res) => {
     });
 
 
-    return res.status(201).json(user);
+    return res.status(201).json(newUser);
 
   } catch (error) {
     res.status(500).json(`signup error: ${error}`);
@@ -47,7 +48,7 @@ export const signIn = async (req, res) => {
   try {
     const  { email, password} = req.body;
 
-    const user = await User.findOne({ email });
+    let user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({ message: "User doesn't exists" });
     }
@@ -56,7 +57,6 @@ export const signIn = async (req, res) => {
     if(!isMatch){
       return res.status(400).json({ message: "Invalid credentials" });
     }
-   
 
     const token = await genToken(user._id);
 
@@ -67,9 +67,7 @@ export const signIn = async (req, res) => {
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
 
-
     return res.status(200).json(user);
-
   } catch (error) {
     res.status(500).json(`signin error: ${error}`);
   }
