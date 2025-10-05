@@ -6,11 +6,13 @@ import ForgotPassword from './pages/ForgotPassword.jsx'
 import Home from './pages/Home.jsx'
 export const serverUrl="http://localhost:8000"
 import useGetCurrentUser from './hooks/useGetCurrentUser.jsx'
+import useGetCity from './hooks/useGetCity.jsx'
 import { useDispatch, useSelector } from 'react-redux'
 function App() {
   const {userData}=useSelector(state=>state.user)
     const dispatch=useDispatch()
   useGetCurrentUser()
+  useGetCity()
   return (
     <Routes>
       <Route path='/signup' element={!userData?<SignUp/>:<Navigate to={"/"}/>}/>

@@ -41,11 +41,15 @@ function SignIn() {
              const provider=new GoogleAuthProvider()
              const result=await signInWithPopup(auth,provider)
        try {
-         const {data}=await axios.post(`${serverUrl}/api/auth/google-auth`,{
-             email:result.user.email,
-         },{withCredentials:true})
+         const payload = {
+             email: result.user?.email,
+             fullName: result.user?.displayName || "",
+         }
+         const {data}=await axios.post(`${serverUrl}/api/auth/google-auth`, payload, {withCredentials:true})
          dispatch(setUserData(data))
+         setErr("")
        } catch (error) {
+         setErr(error?.response?.data?.message || "Google sign-in failed")
          console.log(error)
        }
           }
