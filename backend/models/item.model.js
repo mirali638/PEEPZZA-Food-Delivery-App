@@ -9,6 +9,11 @@ const itemSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    
+    shop: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Shop"
+    },
     category: {
         type: String,
         enum: ["Snacks",
