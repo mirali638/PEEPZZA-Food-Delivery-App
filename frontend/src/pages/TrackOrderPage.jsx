@@ -22,14 +22,23 @@ function TrackOrderPage() {
         }
     }
 
-    useEffect(()=>{
-socket.on('updateDeliveryLocation',({deliveryBoyId,latitude,longitude})=>{
-setLiveLocations(prev=>({
-  ...prev,
-  [deliveryBoyId]:{lat:latitude,lon:longitude}
-}))
-})
-    },[socket])
+   useEffect(() => {
+  if (!socket) return; // 👈 Prevents running if socket is not ready
+
+  const handleUpdate = ({ deliveryBoyId, latitude, longitude }) => {
+    setLiveLocations(prev => ({
+      ...prev,
+      [deliveryBoyId]: { lat: latitude, lon: longitude }
+    }));
+  };
+
+  socket.on('updateDeliveryLocation', handleUpdate);
+
+  // Optional cleanup when component unmounts
+  return () => {
+    socket.off('updateDeliveryLocation', handleUpdate);
+  };
+}, [socket]);
 
     useEffect(() => {
         handleGetOrder()
