@@ -23,9 +23,10 @@ import TrackOrderPage from './pages/TrackOrderPage'
 import Shop from './pages/Shop'
 import { useEffect } from 'react'
 import { io } from 'socket.io-client'
-import { setSocket } from './redux/userSlice'
+ 
 
-export const serverUrl="http://localhost:8000"
+// App.jsx
+export const serverUrl = import.meta.env.VITE_API_URL || "http://localhost:8000";
 function App() {
     const {userData}=useSelector(state=>state.user)
     const dispatch=useDispatch()
@@ -38,16 +39,15 @@ useUpdateLocation()
   useGetMyOrders()
 
   useEffect(()=>{
-const socketInstance=io(serverUrl,{withCredentials:true})
-dispatch(setSocket(socketInstance))
-socketInstance.on('connect',()=>{
-if(userData){
-  socketInstance.emit('identity',{userId:userData._id})
-}
-})
-return ()=>{
-  socketInstance.disconnect()
-}
+    const socketInstance = io(serverUrl,{ withCredentials:true, transports:["polling"] })
+    socketInstance.on('connect', ()=>{
+      if(userData){
+        socketInstance.emit('identity',{ userId:userData._id })
+      }
+    })
+    return ()=>{
+      socketInstance.disconnect()
+    }
   },[userData?._id])
 
   return (
