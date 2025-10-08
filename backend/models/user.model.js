@@ -1,34 +1,27 @@
 import mongoose from "mongoose";
+import { type } from "os";
 
 const userSchema = new mongoose.Schema({
     fullName: {
-        type: String,       
-        required: true,
+        type: String,
+        required: true
     },
     email: {
         type: String,
         required: true,
-        unique: true,
+        unique:true
     },
-    password: {
+    password:{
         type: String,
-        required: function() {
-            return this.authProvider !== 'google';
-        },
     },
-    authProvider: {
+    mobile:{
         type: String,
-        enum: ['local', 'google'],
-        default: 'local',
+        required: true, 
     },
-    mobile : {
-        type: String,
-        required: true,
-    },
-    role : {
-        type: String,
-        enum: ['user', 'owner', 'deliveryBoy'],
-        required: true,
+    role:{
+        type:String,
+        enum:["user","owner","deliveryBoy"],
+        required:true
     },
     resetOtp:{
         type:String
@@ -39,10 +32,24 @@ const userSchema = new mongoose.Schema({
     },
     otpExpires:{
         type:Date
-    }
-},
-    { timestamps: true }
-);
+    },
+    socketId:{
+     type:String,
+     
+    },
+    isOnline:{
+        type:Boolean,
+        default:false
+    },
+   location:{
+type:{type:String,enum:['Point'],default:'Point'},
+coordinates:{type:[Number],default:[0,0]}
+   }
+  
+}, { timestamps: true })
 
-const User = mongoose.model("User", userSchema);
-export default User;
+userSchema.index({location:'2dsphere'})
+
+
+const User=mongoose.model("User",userSchema)
+export default User

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import Nav from './Nav.jsx'
+import Nav from './NaV.JSX'
 import { categories } from '../category'
 import CategoryCard from './CategoryCard'
 import { FaCircleChevronLeft } from "react-icons/fa6";
@@ -23,16 +23,16 @@ function UserDashboard() {
 
 const handleFilterByCategory=(category)=>{
 if(category=="All"){
-  setUpdatedItemsList(itemsInMyCity || [])
+  setUpdatedItemsList(itemsInMyCity)
 }else{
-  const filteredList=(itemsInMyCity || [])?.filter(i=>i.category===category)
+  const filteredList=itemsInMyCity?.filter(i=>i.category===category)
   setUpdatedItemsList(filteredList)
 }
 
 }
 
 useEffect(()=>{
-setUpdatedItemsList(itemsInMyCity || [])
+setUpdatedItemsList(itemsInMyCity)
 },[itemsInMyCity])
 
 
