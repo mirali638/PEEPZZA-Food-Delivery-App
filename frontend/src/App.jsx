@@ -26,7 +26,7 @@ import { io } from 'socket.io-client'
  
 
 // App.jsx
-export const serverUrl = import.meta.env.VITE_API_URL || "http://localhost:8000";
+export const serverUrl = "https://vingo-backend-3vzr.onrender.com";
 function App() {
     const {userData}=useSelector(state=>state.user)
     const dispatch=useDispatch()

@@ -1,4 +1,4 @@
-# 🍕 PEEPZZA - Full-Stack Food Delivery Application
+# 🍕 VINGO - Full-Stack Food Delivery Application
 
 A comprehensive food delivery platform built with modern web technologies, featuring multi-role user management, real-time order tracking, and integrated payment processing.
 
@@ -127,7 +127,7 @@ peepzza/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/peepzza.git
+   git clone https://github.com/mirali638/VINGO-Food-Delivery-App.git
    cd peepzza
    ```
 
@@ -169,24 +169,6 @@ peepzza/
    # Server
    PORT=5000
    ```
-
-5. **Start the development servers**
-   
-   Backend (Terminal 1):
-   ```bash
-   cd backend
-   npm run dev
-   ```
-   
-   Frontend (Terminal 2):
-   ```bash
-   cd frontend
-   npm run dev
-   ```
-
-6. **Access the application**
-   - Frontend: http://localhost:5173
-   - Backend API: http://localhost:5000
 
 ## 🔧 API Endpoints
 
@@ -282,46 +264,5 @@ peepzza/
 - Automatic image optimization
 - CDN delivery for better performance
 - Secure file upload handling
-
-## 🚀 Deployment
-
-### Backend Deployment
-1. Set up MongoDB Atlas or local MongoDB
-2. Configure environment variables
-3. Deploy to platforms like Heroku, Vercel, or AWS
-
-### Frontend Deployment
-1. Build the application: `npm run build`
-2. Deploy to platforms like Netlify, Vercel, or AWS S3
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📝 License
-
-This project is licensed under the ISC License - see the [LICENSE](LICENSE) file for details.
-
-## 👨‍💻 Author
-
-**Mirali Jivani**
-- GitHub: [@yourusername](https://github.com/yourusername)
-- LinkedIn: [Your LinkedIn](https://linkedin.com/in/yourprofile)
-
-## 🙏 Acknowledgments
-
-- [React](https://reactjs.org/) - Frontend framework
-- [Node.js](https://nodejs.org/) - Backend runtime
-- [MongoDB](https://www.mongodb.com/) - Database
-- [Tailwind CSS](https://tailwindcss.com/) - CSS framework
-- [Razorpay](https://razorpay.com/) - Payment gateway
-- [Cloudinary](https://cloudinary.com/) - Cloud storage
-- [Socket.IO](https://socket.io/) - Real-time communication
-
----
 
 ⭐ **Star this repository if you found it helpful!**
