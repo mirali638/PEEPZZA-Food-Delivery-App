@@ -127,7 +127,7 @@ peepzza/
 
 1. **Clone the repository**
    ```bash
-   git clone [https://github.com/yourusername/peepzza.git](https://github.com/mirali638/VINGO-Food-Delivery-App)
+   git clone https://github.com/mirali638/VINGO-Food-Delivery-App.git
    cd peepzza
    ```
 
