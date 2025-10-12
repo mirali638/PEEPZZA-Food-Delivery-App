@@ -23,7 +23,8 @@ const io = new Server(server, {
       "http://localhost:5173",
       "https://vingo-food-delivery-app-2foo.onrender.com"
     ],
-    methods: ["GET", "POST"]
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    credentials: true
   }
 });
 
@@ -38,8 +39,15 @@ app.use(cors({
     "http://localhost:5173",
     "https://vingo-food-delivery-app-2foo.onrender.com"
   ],
-  credentials: true
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
+  preflightContinue: false,
+  optionsSuccessStatus: 200
 }));
+
+// Handle preflight requests
+app.options('*', cors());
 
 app.use(express.json())
 app.use(cookieParser())
@@ -48,6 +56,15 @@ app.use("/api/user",userRouter)
 app.use("/api/shop",shopRouter)
 app.use("/api/item",itemRouter)
 app.use("/api/order",orderRouter)
+
+// Test endpoint to verify CORS
+app.get('/api/test-cors', (req, res) => {
+  res.json({ 
+    message: 'CORS is working!', 
+    origin: req.headers.origin,
+    timestamp: new Date().toISOString()
+  });
+});
 
 socketHandler(io)
 server.listen(port,()=>{
